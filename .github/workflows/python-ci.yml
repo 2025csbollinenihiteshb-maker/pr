@@ -1,0 +1,35 @@
+
+name: Build and Test Python Application
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Display student details
+        run: |
+          echo "Student: Hitesh"
+          echo "Email: 2025cs_bollinenihitesh_b@nie.ac.in"
+          echo "GitHub: 2025csbollinenihiteshb-maker"
+          echo "Repository: pr"
+
+      - name: Build application
+        run: python -m compileall -q calculator.py test_calculator.py
+
+      - name: Run automated tests
+        run: python -m unittest -v test_calculator.py
